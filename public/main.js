@@ -19,8 +19,18 @@ let team2Score = document.querySelector('.team-2-score')
 let team1Counter = 0
 let team2Counter = 0
 
+class Team {
+  constructor(teamNum) {
+    this.teamNum = teamNum
+  }
+}
+
+const team1 = new Team(1)
+const team2 = new Team(2)
+
+
 const updateTeamName = (team) => {
-  if (team == 2) {
+  if (team == team2.teamNum) {
     team2Name.innerHTML = team2Input.value
   }
   else {
@@ -29,7 +39,7 @@ const updateTeamName = (team) => {
 }
 
 const subScore = (team) => {
-  if (team == 2) {
+  if (team == team2.teamNum) {
     if(team2Counter > 0) {
       team2Counter -= 1
       team2Score.innerHTML = team2Counter
@@ -50,7 +60,7 @@ const subScore = (team) => {
 }
 
 const addScore = (team) => {
-  if (team == 2){
+  if (team == team2.teamNum){
     team2Counter += 1
     team2Score.innerHTML = team2Counter
   }
