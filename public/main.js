@@ -1,8 +1,9 @@
 class Team {
-    constructor(name, team, teamNum) {
+    constructor(name, team, teamNum, id) {
         this.name = name;
         this.score = 0;
         this.teamNum = teamNum;
+        this.id = id;
         this.teamClass = document.querySelector(team);
     }
 
@@ -30,34 +31,51 @@ class Team {
     }
 
     sub1Score = () => {
-        this.score--;
+        if (this.score > 0) {
+            this.score--;
+        }
+        else {
+            this.score = 0;
+        }
         this.teamClass.querySelector('#team-score').textContent = this.score;
+        
     }
 }
 
-let Team1 = new Team('Team1', '#team-1-container', '3');
-let Team2 = new Team('Team2', '#team-2-container', '2');
+let Team1 = new Team('Team1', '#team-1-container', '1', '3');
+let Team2 = new Team('Team2', '#team-2-container', '2', '2');
 const Teams = [Team1, Team2];
 
 const resetGame = () => {
     Teams.map((team) => team.resetScore());
-    Team1.teamClass.querySelector("#team-name").textContent = 'Team 1';
-    Team2.teamClass.querySelector("#team-name").textContent = 'Team 2';
+    Teams.map((team) => team.teamClass.querySelector('#team-name-input').value = '');
+    Teams.map((team) => {
+        team.teamClass.querySelector('#team-name').textContent = `Team ${team.teamNum}`
+    }) 
 }
 
-const updateName = (teamNumber) => {
-    let filteredTeam = Teams.filter((team) => team.teamNum % teamNumber == 0);
-    filteredTeam.map((team) => team.changeName());
+const updateName = (teamId) => {
+    Teams.forEach((team) => {
+        if(team.id % teamId == 0) {
+            team.changeName();
+        }
+    });
 }
 
-const subScore = (teamNumber) => {
-    let filteredTeam = Teams.filter((team) => team.teamNum % teamNumber == 0);
-    filteredTeam.map((team) => team.sub1Score());
+const subScore = (teamId) => {
+    Teams.forEach((team) => {
+        if (team.id % teamId == 0){
+            team.sub1Score();
+        }
+    })
 }
 
-const addScore = (teamNumber) => {
-    let filteredTeam = Teams.filter((team) => team.teamNum % teamNumber == 0);
-    filteredTeam.map((team) => team.add1Score());
+const addScore = (teamId) => {
+    Teams.forEach((team) => {
+       if ( team.id % teamId == 0) {
+           team.add1Score();
+       }
+    })
 }
 
 
