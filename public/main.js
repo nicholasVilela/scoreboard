@@ -1,15 +1,22 @@
+let winCounter = document.querySelector('#wins')
+const addBtn = document.querySelectorAll('#add-score')
+const subBtn = document.querySelectorAll('#sub-score')
+const updateNameBtn = document.querySelectorAll('#submit-name')
+
 class Team {
     constructor(name, team, teamNum, id) {
         this.name = name;
         this.score = 0;
         this.teamNum = teamNum;
         this.id = id;
+        this.wins = 0
         this.teamClass = document.querySelector(team);
     }
 
     resetScore = () => {
         this.score = 0;
-        this.teamClass.querySelector('#team-score').textContent = this.score;   
+        this.teamClass.querySelector('#team-score').textContent = this.score;
+        enableOrDisable('enable');
     }
 
     changeName = () => {
@@ -26,8 +33,20 @@ class Team {
     }
 
     add1Score = () => {
-        this.score++;
-        this.teamClass.querySelector('#team-score').textContent = this.score;
+        if (this.score === 20) {
+            this.teamClass.querySelector('#team-score').textContent = 'You Win!'          
+            this.addWin()
+        }
+        else {
+            this.score++;
+            this.teamClass.querySelector('#team-score').textContent = this.score;
+        }  
+    }
+
+    addWin = () => {
+        this.wins += 1
+        winCounter.textContent = `Team Wins: ${this.wins}`
+        enableOrDisable();
     }
 
     sub1Score = () => {
@@ -37,8 +56,7 @@ class Team {
         else {
             this.score = 0;
         }
-        this.teamClass.querySelector('#team-score').textContent = this.score;
-        
+        this.teamClass.querySelector('#team-score').textContent = this.score;     
     }
 }
 
@@ -51,7 +69,62 @@ const resetGame = () => {
     Teams.map((team) => team.teamClass.querySelector('#team-name-input').value = '');
     Teams.map((team) => {
         team.teamClass.querySelector('#team-name').textContent = `Team ${team.teamNum}`
-    }) 
+    })
+}
+
+const disableAll = () => {
+    addBtn.forEach((btn) => {
+        btn.disabled = true;
+    })
+
+    subBtn.forEach((btn) => {
+        btn.disabled = true;
+    })
+
+    updateNameBtn.forEach((btn) => {
+        btn.disabled = true;
+    })
+}
+
+const enableOrDisable = (x) => {
+    addBtn.forEach((btn) => {
+        if (x == 'enable') {
+            btn.disabled = false;
+        }
+        else {
+            btn.disabled = true;
+        }
+    })
+    subBtn.forEach((btn) => {
+        if (x == 'enable') {
+            btn.disabled = false;
+        }
+        else {
+            btn.disabled = true;
+        }
+    })
+    updateNameBtn.forEach((btn) => {
+        if (x == 'enable') {
+            btn.disabled = false;
+        }
+        else {
+            btn.disabled = true;
+        }
+    })
+}
+
+const enableAll = () => {
+    addBtn.forEach((btn) => {
+        btn.disabled = true;
+    })
+
+    subBtn.forEach((btn) => {
+        btn.disabled = true;
+    })
+
+    updateNameBtn.forEach((btn) => {
+        btn.disabled = true;
+    })
 }
 
 const updateName = (teamId) => {
@@ -80,7 +153,6 @@ const addScore = (teamId) => {
 
 
 
-const main = () => {}
-
-
+const main = () => {
+}
 document.addEventListener('DOMContentLoaded', main);
