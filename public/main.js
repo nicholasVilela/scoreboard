@@ -1,73 +1,68 @@
-const team1Input = document.querySelector('.team-1-input')
-let team1Name = document.querySelector('.team-1-name')
-
-const team2Input = document.querySelector('.team-2-input')
-let team2Name = document.querySelector('.team-2-name')
-
-const team1Add = document.querySelector('.team-1-add-1-button')
-const team2Add = document.querySelector('.team-2-add-1-button')
-
-const team1Sub = document.querySelector('.team-1-subtract-1-button')
-const team2Sub = document.querySelector('.team-2-subtract-1-button')
-
-const updateTeam1Btn = document.querySelector('.update-team-1-name')
-const updateTeam2Btn = document.querySelector('.update-team-2-name')
-
-let team1Score = document.querySelector('.team-1-score')
-let team2Score = document.querySelector('.team-2-score')
-
-let team1Counter = 0
-let team2Counter = 0
-
 class Team {
-  constructor(teamNum) {
-    this.teamNum = teamNum
-  }
-}
-
-const team1 = new Team(1)
-const team2 = new Team(2)
-
-
-const updateTeamName = (team) => {
-  if (team == team2.teamNum) {
-    team2Name.innerHTML = team2Input.value
-  }
-  else {
-    team1Name.innerHTML = team1Input.value
-  }
-}
-
-const subScore = (team) => {
-  if (team == team2.teamNum) {
-    if(team2Counter > 0) {
-      team2Counter -= 1
-      team2Score.innerHTML = team2Counter
+    constructor(name, team, teamNum) {
+        this.name = name;
+        this.score = 0;
+        this.teamNum = teamNum;
+        this.teamClass = document.querySelector(team);
     }
-    else {
-      team2Score.innerHTML = 0
-    }   
-  }
-  else {
-    if (team1Counter > 0) {
-      team1Counter -= 1
-      team1Score.innerHTML = team1Counter
+
+    resetScore = () => {
+        this.score = 0;
+        this.teamClass.querySelector('#team-score').textContent = this.score;   
     }
-    else {
-      team1Score.innerHTML = 0
+
+    changeName = () => {
+        const nameInput = this.teamClass.querySelector('#team-name-input').value;
+
+        if (nameInput != '') {
+            this.name = nameInput;           
+        }
+        else {
+            window.alert('Please enter a value into the field.');
+        }
+
+        this.teamClass.querySelector('#team-name').textContent = this.name;
     }
-  }
+
+    add1Score = () => {
+        this.score++;
+        this.teamClass.querySelector('#team-score').textContent = this.score;
+    }
+
+    sub1Score = () => {
+        this.score--;
+        this.teamClass.querySelector('#team-score').textContent = this.score;
+    }
 }
 
-const addScore = (team) => {
-  if (team == team2.teamNum){
-    team2Counter += 1
-    team2Score.innerHTML = team2Counter
-  }
-  else {
-    team1Counter += 1
-    team1Score.innerHTML = team1Counter
-  }
+let Team1 = new Team('Team1', '#team-1-container', '3');
+let Team2 = new Team('Team2', '#team-2-container', '2');
+const Teams = [Team1, Team2];
+
+const resetGame = () => {
+    Teams.map((team) => team.resetScore());
+    Team1.teamClass.querySelector("#team-name").textContent = 'Team 1';
+    Team2.teamClass.querySelector("#team-name").textContent = 'Team 2';
 }
 
-document.addEventListener('DOMContentLoaded', ()=>{})
+const updateName = (teamNumber) => {
+    let filteredTeam = Teams.filter((team) => team.teamNum % teamNumber == 0);
+    filteredTeam.map((team) => team.changeName());
+}
+
+const subScore = (teamNumber) => {
+    let filteredTeam = Teams.filter((team) => team.teamNum % teamNumber == 0);
+    filteredTeam.map((team) => team.sub1Score());
+}
+
+const addScore = (teamNumber) => {
+    let filteredTeam = Teams.filter((team) => team.teamNum % teamNumber == 0);
+    filteredTeam.map((team) => team.add1Score());
+}
+
+
+
+const main = () => {}
+
+
+document.addEventListener('DOMContentLoaded', main);

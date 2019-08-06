@@ -8,46 +8,64 @@
     <link rel="stylesheet" href="/screen.css" />
   </head>
   <body>
-    <h1>My Score Board</h1>
-    <section class="teams">
-      <section class="team one">
-        <section>
-          <h2 class="team-1-name" value="">temp</h2>
-          <p class="team-1-score">0</p>
-        </section>
-        <section>
-          <section>
-            update team 1 name
-            <input type="text" class="team-1-input" />
-            <button class="update-team-1-name" onclick="updateTeamName()">Update</button>
-          </section>
-          <section>
-            update team 1 score
-            <button class="team-1-add-1-button" onclick="addScore()">add 1</button>
-            <button class="team-1-subtract-1-button" onclick="subScore()">subtract 1</button>
-          </section>
-        </section>
-      </section>
-      <section class="team two">
-        <section>
-          <h2 class="team-2-name">temp</h2>
-          <p class="team-2-score" value="0">0</p>
-        </section>
+    
+    <header>
+      <h1>Scoreboards</h1>
+    </header>
 
-        <section>
-          <section>
-            update team 2 name
-            <input type="text" class="team-2-input" />
-            <button class="update-team-2-name" onclick="updateTeamName(2)">Update</button>
-          </section>
-          <section>
-            update team 2 score
-            <button class="team-2-add-1-button" onclick="addScore(2)">add 1</button>
-            <button class="team-2-subtract-1-button" onclick="subScore(2)">subtract 1</button>
-          </section>
-        </section>
-      </section>
-    </section>
+    <div id="team-container">
+      <!-- Team 1 -->
+      <div id="team-1-container" class="team-box">
+        <h1 id="team-name">Team1</h1>
+        <h3 id="team-score">0</h3>
+
+        <label for="update-name">Update team name: </label>
+        <form id="update-name">
+          <input id="team-name-input" />
+          <button id="submit-name" type="button" onclick="updateName(3)">Update</button>
+        </form>
+
+        <hr>
+
+        <label for="update-score">Update team score: </label>
+        <form id="update-score">
+          <button id="add-score" class="btn scores" type="button" onclick="addScore(3)">
+              <p class="score-txt">+</p>
+          </button>
+          <button id="sub-score" class="right btn scores" type="button" onclick="subScore(3)">
+              <p class="score-txt">-</p>
+          </button>
+        </form>
+      </div>
+
+      <!-- Team 2 -->
+      <div id="team-2-container" class="team-box">
+        <h1 id="team-name">Team2</h1>
+        <h3 id="team-score">0</h3>
+  
+        <label for="update-name">Update team name: </label>
+          <form id="update-name">
+            <input id="team-name-input" />
+            <button id="submit-name" type="button" onclick="updateName(2)">Update</button>
+          </form>
+
+          <hr>
+  
+          <label for="update-score">Update team score: </label>
+          <form id="update-score">
+            <button id="add-score" class="btn scores" type="button" onclick="addScore(2)">
+              <p class="score-txt">+</p>
+            </button>
+            <button id="sub-score" class="right btn scores" type="button" onclick="subScore(2)">
+              <p class="score-txt">-</p>
+            </button>
+          </form>
+        </div>
+    </div>
+
+    <form>
+        <button id="reset-score" type="button" onclick="resetGame()" >Reset</button>
+    </form>
 
     <script src="/main.js" charset="utf-8"></script>
   </body>

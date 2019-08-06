@@ -24,26 +24,53 @@ h1 {
   text-align: center;
 }
 
-.teams {
+#team-container {
   display: flex;
-  justify-content: space-around;
-  width: 100%;
-  height: 75%;
+  flex-direction: row;
 }
 
-.team {
+#team-score {
   display: flex;
   align-items: center;
-  flex-direction: column;
-  justify-content: space-around;
-  padding: 0.5rem;
+  justify-content: center;
+  font-size: 50px;
 }
 
-.team h2 {
-  font-size: 2rem;
+#submit-name {
+  height: 3rem;
+  width: 5rem;
 }
 
-.team-1-score, .team-2-score {
-  text-align: center;
-  font-size: 5rem;
+.scores {
+  display: inline-flex;
+  flex-direction: row;
 }
+
+button>p {
+  display: flex;
+  font-size: 50px;
+}
+
+.btn {
+  height: auto;
+  width: auto;
+}
+
+.score-txt {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+.team-box {
+  margin-right: 2rem;
+  margin-left: 2rem;
+}
+
+.right {
+  position: relative;
+  left: 10.9rem;
+}
+
+
